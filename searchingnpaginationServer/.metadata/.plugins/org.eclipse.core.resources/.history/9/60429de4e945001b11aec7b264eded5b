@@ -1,0 +1,6 @@
+package com.nitin.searchingnpagination.services;
+
+@Service
+public interface SearchService {
+
+}

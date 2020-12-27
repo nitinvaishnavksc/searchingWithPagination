@@ -1,0 +1,12 @@
+package com.nitin.searchingnpagination.dom;
+
+public class EmployeeDom {
+	
+	private Integer empNo;
+	private String firstName;
+	private String lastName;
+	private String gender;
+	private String birthDate;
+	private String hireDate;
+
+}

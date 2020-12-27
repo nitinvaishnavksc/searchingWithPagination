@@ -1,0 +1,14 @@
+package com.nitin.searchingnpagination.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nitin.searchingnpagination.repository.EmployeeRepository;
+
+@Service
+public class SearchServiceImpl implements SearchService {
+
+	@Autowired
+	EmployeeRepository employeeRepo;
+	
+}

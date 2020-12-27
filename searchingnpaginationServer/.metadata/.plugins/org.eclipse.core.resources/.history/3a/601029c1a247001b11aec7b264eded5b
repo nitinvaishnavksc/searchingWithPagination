@@ -1,0 +1,48 @@
+package com.nitin.searchingnpagination.services;
+
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import com.nitin.searchingnpagination.dom.EmployeeDom;
+import com.nitin.searchingnpagination.model.Employee;
+import com.nitin.searchingnpagination.repository.EmployeeRepository;
+import com.nitin.searchingnpagination.util.JpaJPQLUtil;
+
+@Service
+public class SearchServiceImpl implements SearchService {
+
+	@Autowired
+	EmployeeRepository employeeRepo;
+	
+	public List<EmployeeDom> searchbykeyword(String skeyword ,Integer page, Integer size)
+	{
+		//@RequestParam Integer page,
+		//@RequestParam Integer size
+		String queryString = "SELECT e FROM Employee e WHERE CONCAT(lower(e.firstName), lower(e.lastName)) LIKE %:keyword% order by e.firstName, e.lastName ";
+		String queryCountString = "SELECT count(e) FROM Employee e WHERE CONCAT(lower(e.firstName), lower(e.lastName)) LIKE %:keyword% ";
+		HashMap<String, Object> paramter = new HashMap<String, Object>();
+		paramter.put("keyword",skeyword);
+		JpaJPQLUtil.JPQLNitinQueryFeatures(queryString, queryCountString, paramter, EmployeeDom.class, page, size);
+		return null;//employeeRepo.findAll();
+	}
+	
+	public List<Employee> searchbyEnter(String skeyword)
+	{
+		 //Page<Employee> arcusts = 
+		 return employeeRepo.search(skeyword,PageRequest.of(0, 10)).getContent(); //arcusts.getContent();
+	}
+	
+	private String datatoString(Date date) 
+	{
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+		return dateFormat.format(date);
+	}
+	
+}

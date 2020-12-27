@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-6"><div class="">
+<ul *ngIf="totalSize > 1" class="pagination">
+<li class="page-item" *ngIf="previousItemValid && firstText" (click)="firstPage()">
+    <a class="page-link" [innerHTML]="firstText">First</a>
+</li>
+<li class="page-item"><a class="page-link" *ngIf="previousItemValid" (click)="previousPage()" aria-label="Previous">
+    <span aria-hidden="true">&laquo;</span></a>
+</li>
+<li  class="page-item" *ngFor="let pageNo of pageList" [ngClass]="{'active':selectedPageNo == pageNo}">
+    <a class="page-link" (click)="setCurrentPage(pageNo)">{{pageNo}}</a>
+</li>
+<li class="page-item"><a class="page-link" *ngIf="nextItemValid" (click)="nextPage()" aria-label="Next">
+    <span aria-hidden="true">&raquo;</span></a>
+</li>
+<li class="page-item" *ngIf="nextItemValid && lastText" (click)="lastPage()">
+    <a class="page-link" [innerHTML]="lastText">Last</a>
+</li>
+</ul>
+</div>
+</div>
+<div class="col-xs-6 col-sm-4 col-md-2 row-space">
+<div class="input-group">
+    <span class="input-group-addon" title="Go to page" (click)="goPage($event)" >
+        <i class="fa fa-arrow-circle-right"  ></i>
+    </span>
+    <input id="goto_page_demo_pag1"  type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="1" [max]="totalSize" [value]="currentPage" class="form-control small-input" title="Go to page">
+</div>
+</div>
+<div class="col-xs-6 col-sm-4 col-md-2 row-space">
+<div class="input-group">
+    <span class="input-group-addon" title="Rows per page" (click)="changePageSize($event)">
+        <i class="fa fa-sort-numeric-asc"></i>
+    </span>
+    <input id="rows_per_page_demo_pag1"  type="number" onkeypress="return event.charCode >= 48 && event.charCode <= 57" min="1" max="50"  [value]="pageSize" class="form-control small-input" title="Rows per page">
+</div>
+</div>
+<div class="col-xs-12 col-sm-4 col-md-2 row-space">
+<div id="rows_info_demo_pag1" class=""><strong>{{toRecord+1}}-{{uptoRecord}} of {{totalItems}} Records (p.{{currentPage}}/{{totalSize}})</strong></div>
+</div>
+</div>
+

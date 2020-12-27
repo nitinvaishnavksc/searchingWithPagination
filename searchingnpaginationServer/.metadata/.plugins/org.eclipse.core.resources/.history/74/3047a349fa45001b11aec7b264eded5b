@@ -1,0 +1,5 @@
+package com.nitin.searchingnpagination.repository;
+
+public interface EmployeeRepository {
+
+}

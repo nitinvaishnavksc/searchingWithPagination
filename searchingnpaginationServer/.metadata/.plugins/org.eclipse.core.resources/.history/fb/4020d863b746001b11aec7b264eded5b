@@ -1,0 +1,57 @@
+package com.nitin.searchingnpagination.util;
+
+import java.util.HashMap;
+
+import javax.persistence.EntityManager;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+public class JpaJPQLUtil {
+	
+	@Autowired
+	private EntityManager em;
+	
+	@SuppressWarnings("rawtypes") 
+	public  <T> HashMap<String, Object> JPQLnitinQueryFeatures (String queryString, String queryCountString, 
+			HashMap<String, Object> paramter, Class<T> className, Integer page, Integer size)
+	{ 
+		Query query = em.createQuery(queryString); 
+		//Declaration Part For Local Scope 
+		Query queryTotal = null; 
+		int pageNumber = 0,pageSize = 0,totalpageNumber = 0;
+		long countResult = 0L; 
+		//Declaration Part For Local Scope
+		if(page!=null && size!=null && queryCountString!=null){
+			queryTotal = em.createQuery(queryCountString); 
+			pageNumber = page+1;
+			pageSize = size;
+			query.setFirstResult((pageNumber-1)* pageSize); 
+			query.setMaxResults(pageSize);
+			}  
+		if(paramter!=null) {
+			Set set = paramter.entrySet();
+			Iterator iterator = set.iterator(); 
+			while(iterator.hasNext()) {
+			Map.Entry mentry = (Map.Entry)iterator.next(); 
+			query.setParameter(mentry.getRey().toString(), mentry.getValue()); 
+			if(page!=null && size!=null && queryCountString!=null) { 
+			queryTotal.setParameter(mentry.getKey().toString(), mentry.getValue()); 
+			}
+		  }
+		) 
+		if(page!=null && size!=null && queryCountString!=null) { 
+		countResult = (long)queryTotal.getSingleResult(); 
+		totalpageNumber = (int) ((countResult / pageSize) + 1); 
+		}
+		List<Object> results = new ArrayList<Object>(); 
+		try ( 
+				@Suppresswarnings ("unchecked") 
+				List<Object []> list = query.getResultList (); 
+				em.close () : 
+					for (Object [] obj : list) 
+					{ Object [] objDom = (obj
+							}; Class<?> params [] -new Class[objDom.length]; for (int i=0; i<objDom.length:i++) (if (objDom[i] instanceof Object []) (params[i] = Object [].class:)} Object ClassobjectWithCons - className.getDeclaredConstructor (params).newInstance (obj Dom) ; results.add (ClassObjectWithCons); catch (Exception ex) (ex.printStackTrace () ;} HashMap<String, Object> finalResult - new HashMap<String, Object> (); finalResult.put ("datatable", results); if (page!=null 6E size!=null 6& queryCountString!=null) ( finalResult.put ("offset", ((pageNumber-1) *pagesize) ); finalResult.put ("onset", (pageNumber-1)= (totalpageNumber-1) ?countResult: ((( (pageNumber-1) *pageSize)) +pageSize)): finalResult.put ("pagenumber", pageNumber); finalResult.put ("pagesize", pagesize); finalResult.put ("totalpages", totalpageNumber) : finalResult.put ("numberofrecords", countResult); return finalResult;
+}
+
+
+}

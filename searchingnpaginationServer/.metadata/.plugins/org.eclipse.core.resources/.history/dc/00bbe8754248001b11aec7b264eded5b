@@ -1,0 +1,38 @@
+## ===============================
+## PORT CHANGE
+## ===============================
+server.port=9000
+
+## ===============================
+## WhiteLabel Error
+## ===============================
+server.error.whitelabel.enabled=false
+#spring.autoconfigure.exclude=org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+
+## ===============================
+## DATABASE
+## ===============================
+spring.datasource.driver-class-name=org.postgresql.Driver
+spring.datasource.url=jdbc:postgresql://localhost:5432/sprlDB?currentSchema=public
+spring.datasource.username=postgres
+spring.datasource.password=toor
+#spring.datasource.tomcat.testOnBorrow=true 
+#spring.datasource.tomcat.validationQuery=SELECT 1
+
+## ===============================
+## JPA / HIBERNATE
+## ===============================
+spring.jpa.show-sql=true
+spring.jpa.hibernate.ddl-auto=update
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+#spring.jpa.hibernate.ddl-auto = create-drop
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+
+
+## ===============================
+## naming Strategy Error  Spring Boot + JPA : Column name annotation ignored
+## ===============================
+spring.jpa.hibernate.naming.implicit-strategy=org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+

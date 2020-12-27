@@ -1,0 +1,5 @@
+package com.nitin.searchingnpagination.services;
+
+public class SearchServiceImpl {
+
+}

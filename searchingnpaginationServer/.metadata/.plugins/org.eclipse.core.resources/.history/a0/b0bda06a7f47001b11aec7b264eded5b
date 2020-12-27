@@ -1,0 +1,23 @@
+package com.nitin.searchingnpagination.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.nitin.searchingnpagination.dom.EmployeeDom;
+import com.nitin.searchingnpagination.repository.EmployeeRepository;
+
+@Service
+public class SearchServiceImpl implements SearchService {
+
+	@Autowired
+	EmployeeRepository employeeRepo;
+	
+	public List<EmployeeDom> searchbykeyword(String skeyword)
+	{
+		
+		return employeeRepo.findAll();
+	}
+	
+}

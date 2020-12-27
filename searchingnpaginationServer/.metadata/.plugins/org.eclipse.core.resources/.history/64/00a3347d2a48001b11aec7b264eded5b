@@ -1,0 +1,49 @@
+package com.nitin.searchingnpagination.services;
+
+import java.util.HashMap;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+
+import com.nitin.searchingnpagination.dom.EmployeeDom;
+import com.nitin.searchingnpagination.model.Employee;
+import com.nitin.searchingnpagination.repository.EmployeeRepository;
+import com.nitin.searchingnpagination.util.JpaJPQLUtil;
+
+@Service
+public class SearchServiceImpl implements SearchService {
+
+	@Autowired
+	EmployeeRepository employeeRepo;
+	
+	@SuppressWarnings("unchecked")
+	public List<EmployeeDom> searchbyEnter(String skeyword ,Integer page, Integer size)
+	{
+		
+		String queryString = "SELECT e.empNo, e.firstName, e.lastName, e.gender, e.birthDate, e.hireDate  FROM Employee e WHERE CONCAT(lower(e.firstName), lower(e.lastName)) LIKE :keyword order by e.firstName, e.lastName ";
+		String queryCountString = "SELECT count(e) FROM Employee e WHERE CONCAT(lower(e.firstName), lower(e.lastName)) LIKE :keyword ";
+		HashMap<String, Object> paramter = new HashMap<String, Object>();
+		skeyword = "%"+skeyword+"%"; 
+		paramter.put("keyword",skeyword);
+		HashMap<String, Object> objResult =JpaJPQLUtil.JPQLNitinQueryFeatures(queryString, queryCountString, paramter, EmployeeDom.class, page, size);
+		if(objResult.get("datatable")!=null && ((List<EmployeeDom>)objResult.get("datatable")).size()>0)
+        {
+            return (List<EmployeeDom>)objResult.get("datatable");
+        }
+        else
+        {
+            return null;
+        }
+	}
+	
+	public List<Employee> searchbykeyword(String skeyword)
+	{
+		 //Page<Employee> arcusts = 
+		 return employeeRepo.search(skeyword,PageRequest.of(0, 10)).getContent(); //arcusts.getContent();
+	}
+	
+	
+	
+}

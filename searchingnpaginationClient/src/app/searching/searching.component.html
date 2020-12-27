@@ -1,0 +1,24 @@
+<div class="s130">
+    <form [formGroup]="seatchForm" autocomplete="false" (ngSubmit)="getSearchResult(seatchForm.value)">
+        <div class="inner-form" [ngClass]="{'searchbarradius' : isShown}">
+            <div class="input-field first-wrap">
+            <div class="svg-wrapper">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+            <input id="search" type="text" formControlName="searchEnter" (keyup)="onKey($event)" autocomplete="off" autocorrect="off" autofocus="autofocus" placeholder="What are you looking for?">
+            </div>
+            <div class="input-field second-wrap">
+            <button class="btn-search" type="submit" >SEARCH</button>
+            </div>
+        </div>
+        <div id="suggestion-box" [ngClass]="{'suggestiondivclass' : isShown}"   *ngIf="isShown" style="position: absolute; min-width: 790px; ">
+            <div id="suggestion-header">Suggestions</div>
+            <ul id="suggestion-box-list">
+                <li class="" *ngFor="let item of searchSuggestions;">
+                    <a  class="suggestion">{{item.firstName}} {{item.lastName}}</a>
+                </li>
+            </ul>
+        </div>
+        <span class="info">ex. Employee Name, Music, Video, Photography</span>
+    </form>
+  </div>

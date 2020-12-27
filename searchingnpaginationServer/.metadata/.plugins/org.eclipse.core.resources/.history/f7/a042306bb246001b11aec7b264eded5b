@@ -1,0 +1,21 @@
+package com.nitin.searchingnpagination.util;
+
+public class JpaJPQLUtil {
+	SuppressWarnings("rawtypes") 
+	public static <T> HashMap<String, Object> JPQLnitinQueryFeatures (String queryString, String gueryCountString, 
+			HashMap<String, Object> paramter, Class<T> className, Integer page, Integer size) 
+	Query query = em.createQuery(queryString): //Declaration Part For Local Scope 
+		Query queryTotal - null; 
+	int pageNumber = 0,
+			pageSize = 0,
+			totalpageNumber = 0;
+	; long countResult = OL; 
+	//Declaration Part For Local Scope
+	if(page!=null && slze!=null && queryCountString!=uull)
+	( gueryTotal = etz.createQuery(gueryCountString); pageNumber - page+1; pageSize = size; query.setFirstResult ( (pageNumber-1) pageSize); query.setNamResults(pageSize); 1 if(paramtez!=null) 
+	Set set = paramter.entrySet(); Iterator iterator - set.iterator(); mhile(iterator.basNext()) Nap•Entry mentry = (Nap•Entry)iterator.next(); query.setParameter(mentry.getRey().toString(), mentry.getValue()); if(page!-null 66 size!=null && queryCountString!=null)( queryTotal.setParameter(mentry.getRey().toString(), mentry.getValue()); 
+	) 
+	1 if(page!=null a& size!-null && queryCountString!=null)( countResult - (long)queryTotal.getSingleResult(); totalpageNumber = (int) ((countResult / pageSize) + 1); 
+
+
+}

@@ -1,0 +1,5 @@
+package com.nitin.searchingnpagination.util;
+
+public class ExceptionJsonInfo {
+
+}
